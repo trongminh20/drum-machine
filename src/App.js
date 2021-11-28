@@ -1,11 +1,12 @@
 import React from 'react'
 import Buttons from './Components/Buttons'
 import Display from './Components/Display'
+import "./SCSS/app.scss";
 export default function App() {
     return (
-        <main id="drum-machine">
+        <section id="drum-machine">
             <Buttons />
             <Display />
-        </main>
+        </section>
     )
 }

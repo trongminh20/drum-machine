@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from 'react'
 import Button from './Button';
 import { AppContext } from '../AppContext';
+import "../SCSS/pad.scss";
 export default function Buttons() {
     const { valueState } = useContext(AppContext);
     const [value, setValue] = valueState;
+
     const soundBank = [
         {
             value: "Q",
@@ -47,17 +49,41 @@ export default function Buttons() {
         let aud = document.getElementById(id);
         aud.play();
         let url = aud.getElementsByTagName('source')[0].src;
-        setValue(url.split("/")[url.split("/").length - 1].split(".")[0].replace(/[-_]/g, " "));
+        setDisplay(url);
     }
+
+    const setDisplay = (url) => {
+        let name = url.split("/");
+        setValue(name[name.length - 1].split(".")[0].replace(/[-_]/g, " "));
+    }
+
+    const handleKeydown = () => {
+        const keyValue = ["Q", "W", "E", "A", "S", "D", "Z", "X", "C"];
+        document.addEventListener('keydown', function (e) {
+            if (keyValue.indexOf(e.key.toUpperCase()) >= 0) {
+                playSound(e.key.toUpperCase());
+            } else {
+                return;
+            }
+        })
+    }
+
+    useEffect(() => {
+        handleKeydown();
+    }, [])
+
     return (
-        <>
+        <section id="pad">
             {
                 soundBank.map(s => {
                     return <div className="drum-pad">
-                        <Button _id={s.value} _sound={s.sound} _value={s.value} _handleClick={() => playSound(s.value)} />
+                        <Button _id={s.value}
+                            _sound={s.sound}
+                            _value={s.value}
+                            _handleClick={() => playSound(s.value)} />
                     </div>
                 })
             }
-        </>
+        </section>
     )
 }

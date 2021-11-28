@@ -1,5 +1,5 @@
 import React from 'react'
-
+import "../SCSS/btn.scss";
 export default function Button({ _value, _handleClick, _id, _sound }) {
     return (
         <>
