@@ -6,9 +6,9 @@ export default function Display() {
     const [value, setValue] = valueState;
 
     return (
-        <section id="display">
+        <section id="soundName">
             <h4>Sound's name</h4>
-            <div id="value">{value}</div>
+            <div id="display">{value}</div>
         </section>
     )
 }
